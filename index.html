@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="images/meta_image.png">
+    <meta property="og:title" content="lazy_minjoo">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="made by lazy_minjoo">
+    <title>lazy_minjoo</title>
+    <link rel="icon" href="images/favicon.ico">
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script tyle="text/javascript" src="src/js/snowfall.jquery.js"></script>
+<script tyle="text/javascript" src="src/js/snowfall.js"></script>
+<script>
+    $(document).ready(function(){
+        $(document).snowfall({
+            image :"src/img/f02.png",
+            minSize: 4,
+            maxSize:20,
+            minSpeed:1,
+            maxSpeed:3,
+            flakeCount : 10
+        });
+    });
+</script>
+</body>
+</html>
