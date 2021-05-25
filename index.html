@@ -13,26 +13,140 @@
     <style>
         .logo {text-align: center; height:100vh; line-height: 100vh;}
         .logo > img { display: inline-block;}
+
+        /* progress bar */
+        .progress {
+        background-color: #000;
+        color: #fff;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        z-index:9999999;
+        }
+        .progress-bar {
+        border-top:1px solid #fff;
+        position: absolute;
+        top: 50%; 
+        width: 0%;
+        opacity: 1;
+        }
+        .progress-bar.progress-complete {
+        border-top-color: #ddd;
+        }
+        .progress-text {
+        font-size: 14px;
+        position: absolute;
+        top: 50%;
+        text-align: center;
+        width: 100%;
+        margin-top:10px;
+        opacity: 0;
+        }
+
+        /* loading */
+        @import url(https://fonts.googleapis.com/css?family=Quattrocento+Sans);
+
+        .loading-text {
+        position: absolute;
+        top: 0;
+        bottom: 50px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        text-align: center;
+        width: 100%;
+        height: 100px;
+        line-height: 100px;
+        }
+        .loading-text span {
+        display: inline-block;
+        margin: 0 5px;
+        color: #fff;
+        font-family: 'Quattrocento Sans', sans-serif;
+        }
+        .loading-text span:nth-child(1) {  
+                filter: blur(0px);  
+                animation: blur-text 1.5s 0s infinite linear alternate;
+        }
+        .loading-text span:nth-child(2) {
+                filter: blur(0px);
+                animation: blur-text 1.5s 0.2s infinite linear alternate;
+        }
+        .loading-text span:nth-child(3) {  
+                filter: blur(0px);
+                animation: blur-text 1.5s 0.4s infinite linear alternate;
+        }
+        .loading-text span:nth-child(4) {
+                filter: blur(0px);
+                animation: blur-text 1.5s 0.6s infinite linear alternate;
+        }
+        .loading-text span:nth-child(5) {
+                filter: blur(0px);
+                animation: blur-text 1.5s 0.8s infinite linear alternate;
+        }
+        .loading-text span:nth-child(6) {  
+                filter: blur(0px);
+                animation: blur-text 1.5s 1s infinite linear alternate;
+        }
+        .loading-text span:nth-child(7) {
+                filter: blur(0px);
+                animation: blur-text 1.5s 1.2s infinite linear alternate;
+        }
     </style>
 </head>
 <body>
+<!-- 로딩 페이지-->
+<div class="progress" id="progress">
+    <div id="loading">
+        <div class="loading-text">
+            <span class="loading-text-words">L</span>
+            <span class="loading-text-words">O</span>
+            <span class="loading-text-words">A</span>
+            <span class="loading-text-words">D</span>
+            <span class="loading-text-words">I</span>
+            <span class="loading-text-words">N</span>
+            <span class="loading-text-words">G</span>
+        </div>
+    </div>		
+<span class="progress-bar"></span>
+<span class="progress-text">0%</span>
+</div>
 <div class="logo">
     <img src="src/img/logo.png"/>
 </div>
 <script src="src/js/jquery.min.js"></script>
 <script type="text/javascript" src="src/js/snowfall.jquery.js"></script>
 <script type="text/javascript" src="src/js/snowfall.js"></script>
+<script src="src/js/imagesloaded.pkgd.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $(document).snowfall({
-            image :"src/img/f02.png",
-            minSize: 4,
-            maxSize:20,
-            minSpeed:1,
-            maxSpeed:3,
-            flakeCount : 10
-        });
+$(document).ready(function(){
+    imagesProgress();
+
+    $(document).snowfall({
+        image :"src/img/f02.png",
+        minSize: 4,
+        maxSize:20,
+        minSpeed:1,
+        maxSpeed:3,
+        flakeCount : 10
     });
+});
+
+/* 로딩 스크립트 함수 */
+function imagesProgress() {
+    var $container = $('#progress'),
+    $progressBar = $container.find('.progress-bar'),
+    $progressText = $container.find('.progress-text'),
+    imgLoad = imagesLoaded('html'),
+    imgTotal = imgLoad.images.length,
+    imgLoaded = 0,
+    current = 0,
+    progressTimer = setInterval(updateProgress, 1000 / 60);
+
+    imgLoad.on('progress', function(){
+     imgLoaded++;
+    });
+};
 </script>
 </body>
 </html>
